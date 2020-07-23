@@ -21,8 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  shared_preferences: ^0.5.8
-#  shared_preferences_web: ^0.1.2+7
+  shared_preferences: ^0.5.4+8
+  shared_preferences_web: ^0.1.0
   flushbar: ^1.10.4
   flux_validator_dart: ^1.0.3
   hasura_connect: ^1.2.2+1

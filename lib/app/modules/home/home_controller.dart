@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:siges/app/app_controller.dart';
+
+import '../../app_controller.dart';
 
 part 'home_controller.g.dart';
 
