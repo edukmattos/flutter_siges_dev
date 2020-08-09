@@ -1,4 +1,7 @@
 import 'package:mobx/mobx.dart';
+import 'package:siges/app/models/material_model.dart';
+
+import 'repositories/material_list_repository.dart';
 
 part 'material_list_controller.g.dart';
 
@@ -6,11 +9,18 @@ class MaterialListController = _MaterialListControllerBase
     with _$MaterialListController;
 
 abstract class _MaterialListControllerBase with Store {
+
+  final MaterialListRepository _materialListRepository;
+
   @observable
-  int value = 0;
+  ObservableStream<List<MaterialModel>> materials;
+
+  _MaterialListControllerBase(this._materialListRepository) {
+    materialsAll();
+  }
 
   @action
-  void increment() {
-    value++;
+  materialsAll() {
+    materials = ObservableStream(_materialListRepository.getMaterialAll());
   }
 }

@@ -25,6 +25,20 @@ mixin _$UnitsMeasureListController on _UnitsMeasureListControllerBase, Store {
     });
   }
 
+  final _$_UnitsMeasureListControllerBaseActionController =
+      ActionController(name: '_UnitsMeasureListControllerBase');
+
+  @override
+  dynamic unitsMeasureAll() {
+    final _$actionInfo = _$_UnitsMeasureListControllerBaseActionController
+        .startAction(name: '_UnitsMeasureListControllerBase.unitsMeasureAll');
+    try {
+      return super.unitsMeasureAll();
+    } finally {
+      _$_UnitsMeasureListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:siges/app/models/units_measure_model.dart';
+import 'package:siges/app/modules/units_measure/units_measure_list/units_measure_list_module.dart';
 
 import '../../../config/app_config.dart';
 import 'units_measure_list_controller.dart';
@@ -123,13 +125,18 @@ class _UnitsMeasureListPageState
           //  (unitMeasure1, unitMeasure2) => unitMeasure1.description.toUpperCase().compareTo(unitMeasure2.description.toUpperCase())
           //);
 
+          List<UnitsMeasureModel> list = controller.unitsMeasure.value;
+
           return ListView.builder(
             itemCount: controller.unitsMeasure.value.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (_, int index) {
+              
+              var unitMeasure = list[index];
+
               return ListTile(
                 leading: Icon(Icons.access_alarm),
-                title: Text(controller.unitsMeasure.value[index].code),
-                subtitle: Text(controller.unitsMeasure.value[index].description),
+                title: Text('${unitMeasure.code}'),
+                subtitle: Text('${unitMeasure.description}'),
                 isThreeLine: true,
                 trailing: Icon(Icons.account_circle),
                 //selected: false,

@@ -12,7 +12,7 @@ class UnitsMeasureListModule extends ChildModule {
   List<Bind> get binds => [
         Bind<IUnitsMeasureListRepository>(
             (i) => UnitsMeasureListRepository(i.get<HasuraConnect>())),
-        Bind((i) => UnitsMeasureListController(i.get<UnitsMeasureListRepository>())),
+        Bind((i) => UnitsMeasureListController(i.get<IUnitsMeasureListRepository>())),
         Bind((i) => HasuraConnect(hasura_config_url)),
       ];
 

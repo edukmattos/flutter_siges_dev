@@ -10,8 +10,8 @@ import 'repositories/material_list_repository.dart';
 class MaterialListModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind<IMaterialListRepository>((i) => MaterialListRepository()),
-        Bind((i) => MaterialListController()),
+        Bind<IMaterialListRepository>((i) => MaterialListRepository(i.get<HasuraConnect>())),
+        Bind((i) => MaterialListController(i.get<IMaterialListRepository>())),
         Bind((i) => HasuraConnect(hasura_config_url)),
       ];
 

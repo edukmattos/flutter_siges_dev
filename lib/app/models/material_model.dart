@@ -71,6 +71,13 @@ class MaterialModel {
         "updated_at": updatedAt == null ? null : updatedAt.toIso8601String(),
         "deleted_at": deletedAt == null ? null : deletedAt.toIso8601String(),
     };
+
+    static List<MaterialModel> fromJsonList(List list) {
+      if (list == null) return null;
+      return list
+        .map<MaterialModel>((item) => MaterialModel.fromMap(item))
+        .toList();
+    }
 }
 
 class MaterialUnit {

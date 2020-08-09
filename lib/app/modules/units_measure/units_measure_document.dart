@@ -1,6 +1,11 @@
 const String docUnitsMeasureAll = '''
   subscription {
-    units_measure {
+    units_measure (
+      order_by: {
+        code: asc
+      }
+    )
+    {
       id
       code
       description

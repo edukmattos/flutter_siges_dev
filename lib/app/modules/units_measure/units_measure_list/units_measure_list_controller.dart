@@ -11,11 +11,17 @@ abstract class _UnitsMeasureListControllerBase with Store {
 
   final UnitsMeasureListRepository _unitsMeasureListRepository;
 
+  @observable
+  ObservableStream<List<UnitsMeasureModel>> unitsMeasure;
+
   _UnitsMeasureListControllerBase(this._unitsMeasureListRepository) {
+    unitsMeasureAll();
+  }
+
+  @action
+  unitsMeasureAll() {
     unitsMeasure = ObservableStream(_unitsMeasureListRepository.getUnitsMeasureAll());
   }
 
-  @observable
-  ObservableStream<List<UnitsMeasureModel>> unitsMeasure;
   
 }

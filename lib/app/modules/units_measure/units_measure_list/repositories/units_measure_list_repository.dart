@@ -8,6 +8,7 @@ class UnitsMeasureListRepository implements IUnitsMeasureListRepository {
 
   UnitsMeasureListRepository(this._hasuraConnect);
 
+  @override
   Stream<List<UnitsMeasureModel>> getUnitsMeasureAll() {
     
     var query = docUnitsMeasureAll;

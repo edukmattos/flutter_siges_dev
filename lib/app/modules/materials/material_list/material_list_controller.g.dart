@@ -9,18 +9,18 @@ part of 'material_list_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$MaterialListController on _MaterialListControllerBase, Store {
-  final _$valueAtom = Atom(name: '_MaterialListControllerBase.value');
+  final _$materialsAtom = Atom(name: '_MaterialListControllerBase.materials');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  ObservableStream<List<MaterialModel>> get materials {
+    _$materialsAtom.reportRead();
+    return super.materials;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set materials(ObservableStream<List<MaterialModel>> value) {
+    _$materialsAtom.reportWrite(value, super.materials, () {
+      super.materials = value;
     });
   }
 
@@ -28,11 +28,11 @@ mixin _$MaterialListController on _MaterialListControllerBase, Store {
       ActionController(name: '_MaterialListControllerBase');
 
   @override
-  void increment() {
+  dynamic materialsAll() {
     final _$actionInfo = _$_MaterialListControllerBaseActionController
-        .startAction(name: '_MaterialListControllerBase.increment');
+        .startAction(name: '_MaterialListControllerBase.materialsAll');
     try {
-      return super.increment();
+      return super.materialsAll();
     } finally {
       _$_MaterialListControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +41,7 @@ mixin _$MaterialListController on _MaterialListControllerBase, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+materials: ${materials}
     ''';
   }
 }
