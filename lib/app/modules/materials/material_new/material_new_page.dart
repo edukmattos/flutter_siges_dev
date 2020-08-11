@@ -33,7 +33,7 @@ class _MaterialNewPageState
               var result = await controller.save();
               //print("result: $result");
               if (result) {
-                Modular.to.pushReplacementNamed('/units_measure/list');
+                Modular.to.pushReplacementNamed('/material/list');
               } else {
                 _flushBar();
                 //Modular.to.pushReplacementNamed('/auth');

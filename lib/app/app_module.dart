@@ -16,12 +16,17 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, module: MaterialListModule()),
+        Router('/material/list',
+            module: MaterialListModule(),
+            transition: TransitionType.rightToLeft),
+
         Router('/units_measure/new',
             module: UnitsMeasureNewModule(),
             transition: TransitionType.rightToLeft),
         Router('/units_measure/list',
             module: UnitsMeasureListModule(),
             transition: TransitionType.rightToLeft),
+
       ];
 
   @override

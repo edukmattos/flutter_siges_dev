@@ -1,6 +1,7 @@
 import 'package:hasura_connect/hasura_connect.dart';
-import 'package:siges/app/models/units_measure_model.dart';
-import 'package:siges/app/modules/units_measure/units_measure_document.dart';
+
+import '../../../../models/units_measure_model.dart';
+import '../../material_document.dart';
 import 'interfaces/material_new_repository_interface.dart';
 
 class MaterialNewRepository implements IMaterialNewRepository {
@@ -11,7 +12,7 @@ class MaterialNewRepository implements IMaterialNewRepository {
   @override
   Future<List<UnitsMeasureModel>> getUnitsMeasureAll() async {
     
-    var query = docUnitsMeasureAll;
+    var query = docMaterialUnitsMeasureAll;
 
     var snapshot = await _hasuraConnect.query(query);
 
@@ -24,7 +25,7 @@ class MaterialNewRepository implements IMaterialNewRepository {
     print(code);
     print(description);
     
-    var query = docUnitsMeasureSave;
+    var query = docMaterialSave;
 
     var snapshot = await _hasuraConnect.mutation(query, variables: {
       "code": code,
@@ -32,7 +33,7 @@ class MaterialNewRepository implements IMaterialNewRepository {
       "material_unit_id": unitMeasureSelected.id,
     });
     
-    return snapshot["data"]["materials"]["affected_rows"] > 0;
+    return snapshot["data"]["insert_materials"]["affected_rows"] > 0;
   }
 
   //dispose will be called automatically
