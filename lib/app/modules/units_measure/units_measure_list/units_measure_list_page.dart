@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:siges/app/models/units_measure_model.dart';
-import 'package:siges/app/modules/units_measure/units_measure_list/units_measure_list_module.dart';
 
 import '../../../config/app_config.dart';
+import '../../../models/units_measure_model.dart';
 import 'units_measure_list_controller.dart';
 
 class UnitsMeasureListPage extends StatefulWidget {

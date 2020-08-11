@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  smart_select: ^3.0.3
   shared_preferences: ^0.5.4+8
   shared_preferences_web: ^0.1.0
   flushbar: ^1.10.4

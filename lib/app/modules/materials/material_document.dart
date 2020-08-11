@@ -16,3 +16,21 @@ const String docMaterialAll = '''
     }
   }
 ''';
+
+const String docUnitsMeasureAll = '''
+  query {
+    units_measure (
+      order_by: {
+        code: asc
+      }
+    )
+    {
+      id
+      code
+      description
+      created_at
+      update_at
+      deleted_at
+    }
+  }
+''';

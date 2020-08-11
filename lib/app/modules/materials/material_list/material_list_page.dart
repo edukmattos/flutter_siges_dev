@@ -75,7 +75,7 @@ class _MaterialListPageState
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add), 
         onPressed: () {
-          Modular.to.pushReplacementNamed('/units_measure/new');
+          Modular.to.pushReplacementNamed('/material_new');
         },
       ),
      
