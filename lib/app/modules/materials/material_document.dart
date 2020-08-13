@@ -1,6 +1,11 @@
 const String docMaterialAll = '''
   subscription getMaterials {
-    materials {
+    materials (
+      order_by: {
+        description: asc
+      }
+    )
+    {
       id
       code
       description

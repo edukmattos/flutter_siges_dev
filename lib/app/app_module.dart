@@ -3,8 +3,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app_controller.dart';
 import 'app_widget.dart';
+import 'modules/clients/client_new/client_new_module.dart';
 import 'modules/home/home_module.dart';
+import 'modules/materials/material_dashboard/material_dashboard_module.dart';
 import 'modules/materials/material_list/material_list_module.dart';
+import 'modules/materials/material_new/material_new_module.dart';
 import 'modules/units_measure/units_measure_list/units_measure_list_module.dart';
 import 'modules/units_measure/units_measure_new/units_measure_new_module.dart';
 
@@ -17,8 +20,19 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, module: HomeModule()),
+        Router('/material/dashboard',
+            module: MaterialDashboardModule(),
+            transition: TransitionType.rightToLeft),
         Router('/material/list',
             module: MaterialListModule(),
+            transition: TransitionType.rightToLeft),
+            
+        Router('/client/new',
+            module: ClientNewModule(),
+            transition: TransitionType.rightToLeft),
+
+        Router('/material/new',
+            module: MaterialNewModule(),
             transition: TransitionType.rightToLeft),
 
         Router('/units_measure/new',

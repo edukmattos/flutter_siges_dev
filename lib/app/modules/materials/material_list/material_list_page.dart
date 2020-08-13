@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siges/app/config/app_config.dart';
 import 'package:siges/app/models/material_model.dart';
+import 'package:siges/shared/widgets/drawer/drawer_navigation_widget.dart';
 import 'material_list_controller.dart';
 
 class MaterialListPage extends StatefulWidget {
@@ -44,7 +45,7 @@ class _MaterialListPageState
             ),
           )
         ],
-      )
+      ),
     );
 
     //var appBar = AppBar(
@@ -102,8 +103,7 @@ class _MaterialListPageState
         onPressed: () {
           Modular.to.pushReplacementNamed('/material/new');
         },
-      ),
-     
+      ),     
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         child: Row(
@@ -169,6 +169,7 @@ class _MaterialListPageState
           );
         }
       ),
+      drawer: DrawerNavigationWidget(),
     );
   }
 }

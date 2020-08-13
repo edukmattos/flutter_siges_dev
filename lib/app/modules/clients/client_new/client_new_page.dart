@@ -2,34 +2,30 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:siges/app/config/app_config.dart';
 import 'package:siges/shared/widgets/buttons/button_raised_widget.dart';
-import 'package:smart_select/smart_select.dart';
+import '../../../config/app_config.dart';
+import 'client_new_controller.dart';
 
-import '../../../models/units_measure_model.dart';
-import 'material_new_controller.dart';
-
-class MaterialNewPage extends StatefulWidget {
+class ClientNewPage extends StatefulWidget {
   final String title;
   final String subtitle;
 
-  const MaterialNewPage({
+  const ClientNewPage({
     Key key, 
-    this.title = appPageTagMaterial, 
+    this.title = appPageTagClient, 
     this.subtitle = appPageTagFunctionNew
-  })
+  }) 
   : super(key: key);
 
   @override
-  _MaterialNewPageState createState() => _MaterialNewPageState();
-  
+  _ClientNewPageState createState() => _ClientNewPageState();
 }
 
-class _MaterialNewPageState
-    extends ModularState<MaterialNewPage, MaterialNewController> {
+class _ClientNewPageState
+    extends ModularState<ClientNewPage, ClientNewController> {
   //use 'controller' variable to access controller
-  
-  Widget _buttonSubmit() {
+
+    Widget _buttonSubmit() {
     return ButtonRaisedWidget(
       text: "Enviar",
       textColor: Colors.white,
@@ -71,7 +67,7 @@ class _MaterialNewPageState
     )..show(context);
   }
 
-  @override
+  @override  
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Column(
@@ -92,7 +88,7 @@ class _MaterialNewPageState
       leading: IconButton(
         icon: Icon(Icons.arrow_back), 
         onPressed: () {
-          Modular.to.pushReplacementNamed('/material/list');
+          Modular.to.pushReplacementNamed('/client/list');
         }
       )
     );
@@ -115,12 +111,12 @@ class _MaterialNewPageState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Observer(
-                          name: 'observerCode',
+                          name: 'observerEinSsa',
                           builder: (_) {
                             return TextFormField(
-                              textDirection: TextDirection.rtl,
+                              textDirection: TextDirection.ltr,
                               autofocus: true,
-                              onChanged: controller.changeCode,
+                              onChanged: controller.changeEinSsa,
                               obscureText: false,
                               maxLines: 1,
                               maxLength: 5,
@@ -128,11 +124,11 @@ class _MaterialNewPageState
                               cursorColor: Colors.orange,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'Código',
+                                labelText: 'CPF/CNPJ',
                                 prefixIcon: Icon(Icons.email,
                                   color: Colors.orange, size: 20),
                                 helperText: ' ',
-                                errorText: controller.validateCode(),
+                                errorText: controller.validateEinSsa(),
                               ),
                             );
                           },
@@ -143,10 +139,10 @@ class _MaterialNewPageState
                         ),
                   
                         Observer(
-                          name: 'descriptionObserver',
+                          name: 'nameObserver',
                           builder: (_) {
                             return TextFormField(
-                              onChanged: controller.changeDescription,
+                              onChanged: controller.changeName,
                               obscureText: false,
                               maxLines: 1,
                               maxLength: 30,
@@ -154,11 +150,11 @@ class _MaterialNewPageState
                               cursorColor: Colors.orange,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'Descrição',
+                                labelText: 'Nome',
                                 prefixIcon: Icon(Icons.lock,
                                   color: Colors.orange, size: 20),
                                 helperText: ' ',
-                                errorText: controller.validateDescription(),
+                                errorText: controller.validateName(),
                               ),
                             );
                           },
@@ -169,53 +165,10 @@ class _MaterialNewPageState
                         ),
                   
                         Observer(
-                          name: 'materialUnitIdObserver',
-                          builder: (_) {
-                            return SmartSelect<UnitsMeasureModel>.single(
-                              title: 'Unidade',
-                              value: controller.unitMeasureSelected,
-                              isTwoLine: false,
-                              isLoading: false,
-                              leading: Container(
-                                width: 40,
-                                alignment: Alignment.center,
-                                child: const Icon(Icons.calendar_today),
-                              ),
-                              options: SmartSelectOption.listFrom<UnitsMeasureModel,
-                                  UnitsMeasureModel>(
-                                source: controller.unitsMeasureOptions,
-                                value: (index, item) => item,
-                                title: (index, item) => item.description),
-                              choiceType: SmartSelectChoiceType.chips,
-                              modalType: SmartSelectModalType.popupDialog,
-                              modalConfig: SmartSelectModalConfig(
-                                useHeader: true,
-                                useConfirmation: true,
-                                useFilter: true,
-                                headerStyle: SmartSelectModalHeaderStyle(
-                                  centerTitle: false,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(15.0),
-                                      topRight: Radius.circular(15.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              onChange: controller.changeUnitMeasureSelected,
-                            );
-                          },
-                        ),
-                  
-                        SizedBox(
-                          height: 20,
-                        ),
-                  
-                        Observer(
-                          name: 'obseverDescription',
+                          name: 'emailObserver',
                           builder: (_) {
                             return TextFormField(
-                              onChanged: controller.changeDescription,
+                              onChanged: controller.changeEmail,
                               obscureText: false,
                               maxLines: 1,
                               maxLength: 30,
@@ -223,11 +176,11 @@ class _MaterialNewPageState
                               cursorColor: Colors.orange,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'Descrição',
-                                prefixIcon: Icon(Icons.lock,
+                                labelText: 'E-mail',
+                                prefixIcon: Icon(Icons.email,
                                   color: Colors.orange, size: 20),
                                 helperText: ' ',
-                                errorText: controller.validateDescription(),
+                                errorText: controller.validateEmail(),
                               ),
                             );
                           },

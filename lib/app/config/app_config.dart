@@ -11,8 +11,10 @@ const appPageTagFunctionEdit = 'Alteração';
 const appPageTagFunctionDestroy = 'Exclusão';
 const appPageTagFunctionShow = 'Consulta';
 const appPageTagFunctionSearch = 'Pesquisa';
+const appPageTagFunctionDashboard = 'Painel Controle';
 
 const appPageTagMaterial  = 'Materiais';
+const appPageTagClient  = 'Clientes';
 
 const appClientDashboardPageTag  = 'Clientes';
 const appClientListPageTag = 'Clientes';
