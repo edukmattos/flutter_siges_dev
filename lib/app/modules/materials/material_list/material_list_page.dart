@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:siges/app/config/app_config.dart';
 import 'package:siges/app/models/material_model.dart';
 import 'material_list_controller.dart';
 
 class MaterialListPage extends StatefulWidget {
   final String title;
-  const MaterialListPage({Key key, this.title = "Materiais"})
-      : super(key: key);
+  final String subtitle;
+
+  const MaterialListPage({
+    Key key, 
+    this.title = appPageTagMaterial, 
+    this.subtitle = appPageTagFunctionSearch
+  })
+  : super(key: key);
 
   @override
   _MaterialListPageState createState() => _MaterialListPageState();
@@ -21,61 +28,79 @@ class _MaterialListPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: !isSearching 
-          ? Text(widget.title)
-          : TextField(
-            style: TextStyle(
-              color: Colors.white
-            ),
-            decoration: InputDecoration(
-              icon: Icon(
-                Icons.search,
-                color: Colors.white
+
+    var appBar = AppBar(
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(widget.title),
+          Visibility(
+            visible: true,
+            child: Text(widget.subtitle,
+              style: TextStyle(
+                fontSize: 12.0
               ),
-              hintText: "Pesquisar Materiais",
-              hintStyle: TextStyle(
-                color: Colors.white
-              )
-            )
-          ),
-        leading: IconButton(
-          icon: Icon(Icons.menu), 
-          onPressed: null
-        ),
-        actions: <Widget>[
-          isSearching 
-          ? IconButton(
-            icon: Icon(Icons.cancel),
-            onPressed: () {
-              setState(() {
-                isSearching = !this.isSearching;
-              });
-           
-            }
+            ),
           )
-          : IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              setState(() {
-                isSearching = !this.isSearching;
-              });
-           
-            }
-          ),
-          IconButton(
-            icon: Icon(Icons.more_vert),
-            onPressed: () {
-           
-            },
-          ),
-        ]
-      ),
+        ],
+      )
+    );
+
+    //var appBar = AppBar(
+    //  title: !isSearching 
+    //    ? Text(widget.title)
+    //    : TextField(
+    //      style: TextStyle(
+    //        color: Colors.white
+    //      ),
+    //      decoration: InputDecoration(
+    //        icon: Icon(
+    //          Icons.search,
+    //          color: Colors.white
+    //        ),
+    //        hintText: "Pesquisar Materiais",
+    //        hintStyle: TextStyle(
+    //          color: Colors.white
+    //        )
+    //      )
+    //    ),
+    //  leading: IconButton(
+    //    icon: Icon(Icons.menu), 
+    //    onPressed: null
+    //  ),
+    //  actions: <Widget>[
+    //    isSearching 
+    //    ? IconButton(
+    //      icon: Icon(Icons.cancel),
+    //      onPressed: () {
+    //        setState(() {
+    //          isSearching = !this.isSearching;
+    //        });
+    //      }
+    //    )
+    //    : IconButton(
+    //      icon: Icon(Icons.search),
+    //      onPressed: () {
+    //        setState(() {
+    //          isSearching = !this.isSearching;
+    //        });
+    //      }
+    //    ),
+    //    IconButton(
+    //      icon: Icon(Icons.more_vert),
+    //      onPressed: () {
+    //      },
+    //    ),
+    //  ]
+    //);
+
+    return Scaffold(
+      appBar: appBar,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add), 
         onPressed: () {
-          Modular.to.pushReplacementNamed('/material_new');
+          Modular.to.pushReplacementNamed('/material/new');
         },
       ),
      
@@ -117,14 +142,10 @@ class _MaterialListPageState
             );
           }
 
-          // Ordenacao
-          //controller.unitsMeasure.value.sort(
-          //  (unitMeasure1, unitMeasure2) => unitMeasure1.description.toUpperCase().compareTo(unitMeasure2.description.toUpperCase())
-          //);
-
           List<MaterialModel> list = controller.materials.value;
 
           return ListView.builder(
+            reverse: false,
             itemCount: controller.materials.value.length,
             itemBuilder: (_, int index) {
               
@@ -133,9 +154,9 @@ class _MaterialListPageState
               return ListTile(
                 leading: Text('${model.code}'),
                 title: Text('${model.description}'),
-                subtitle: Text(''),
+                subtitle: Text('${model.materialUnit.code}'),
                 isThreeLine: false,
-                trailing: Text('${model.materialUnit.code}'),
+                trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black, size: 40.0),
                 //selected: false,
                 onLongPress: (){
                   print("onLongPress");

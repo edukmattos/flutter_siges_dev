@@ -4,10 +4,21 @@ import 'package:flutter/material.dart';
 const appUserLoggedName = '';
 const appUserLoggedEmail = 'edukmattos@gmail.com';
 
+
 // Pages
+const appPageTagFunctionNew = 'Inclusão';
+const appPageTagFunctionEdit = 'Alteração';
+const appPageTagFunctionDestroy = 'Exclusão';
+const appPageTagFunctionShow = 'Consulta';
+const appPageTagFunctionSearch = 'Pesquisa';
+
+const appPageTagMaterial  = 'Materiais';
+
 const appClientDashboardPageTag  = 'Clientes';
 const appClientListPageTag = 'Clientes';
 const appClientNewPageTag = 'Novo Cliente';
+
+//const appMaterialPageTag  = 'Materiais';
 
 const appMaterialDashboardPageTag  = 'Materiais';
 const appMaterialListPageTag = 'Materiais';

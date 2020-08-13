@@ -19,7 +19,7 @@ class MaterialListModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => MaterialListPage()),
-        Router('/material_new',
+        Router('/material/new',
             module: MaterialNewModule(),
             transition: TransitionType.rightToLeft),
       ];
