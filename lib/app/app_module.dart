@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app_controller.dart';
 import 'app_widget.dart';
+import 'modules/clients/client_list/client_list_module.dart';
 import 'modules/clients/client_new/client_new_module.dart';
 import 'modules/home/home_module.dart';
 import 'modules/materials/material_dashboard/material_dashboard_module.dart';
@@ -29,6 +30,9 @@ class AppModule extends MainModule {
             
         Router('/client/new',
             module: ClientNewModule(),
+            transition: TransitionType.rightToLeft),
+        Router('/client/list',
+            module: ClientListModule(),
             transition: TransitionType.rightToLeft),
 
         Router('/material/new',

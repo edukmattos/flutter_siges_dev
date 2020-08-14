@@ -1,5 +1,7 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siges/shared/widgets/buttons/button_raised_widget.dart';
@@ -36,7 +38,7 @@ class _ClientNewPageState
           var result = await controller.save();
           //print("result: $result");
           if (result) {
-            Modular.to.pushReplacementNamed('/material/list');
+            Modular.to.pushReplacementNamed('/client/list');
           } else {
             _flushBar();
             //Modular.to.pushReplacementNamed('/auth');
@@ -119,7 +121,7 @@ class _ClientNewPageState
                               onChanged: controller.changeEinSsa,
                               obscureText: false,
                               maxLines: 1,
-                              maxLength: 5,
+                              maxLength: 20,
                               keyboardType: TextInputType.emailAddress,
                               cursorColor: Colors.orange,
                               decoration: InputDecoration(
@@ -130,6 +132,11 @@ class _ClientNewPageState
                                 helperText: ' ',
                                 errorText: controller.validateEinSsa(),
                               ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                CpfOuCnpjFormatter(),
+                              ],
+                              
                             );
                           },
                         ),

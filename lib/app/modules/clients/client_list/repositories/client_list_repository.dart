@@ -1,15 +1,23 @@
-import 'package:dio/native_imp.dart';
+import 'package:hasura_connect/hasura_connect.dart';
+
+import '../../../../models/client_model.dart';
+import '../../client_document.dart';
 import 'interfaces/client_list_repository_interface.dart';
 
 class ClientListRepository implements IClientListRepository {
-  final DioForNative client;
+  final HasuraConnect _hasuraConnect;
 
-  ClientListRepository(this.client);
+  ClientListRepository(this._hasuraConnect);
 
-  Future fetchPost() async {
-    final response =
-        await client.get('https://jsonplaceholder.typicode.com/posts/1');
-    return response.data;
+  @override
+  Stream<List<ClientModel>> getClientAll() {
+    
+    var query = docClientAll;
+
+    var snapshot = _hasuraConnect.subscription(query);
+    
+    return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
+
   }
 
   //dispose will be called automatically

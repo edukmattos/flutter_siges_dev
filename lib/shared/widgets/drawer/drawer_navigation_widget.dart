@@ -20,7 +20,7 @@ class DrawerNavigationWidget extends StatelessWidget {
           DrawerBodyItemWidget(
             icon: Icons.home,
             text: 'Clientes',
-            onTap: () => Modular.to.pushReplacementNamed('/client/new')),
+            onTap: () => Modular.to.pushReplacementNamed('/client/list')),
 
           DrawerBodyItemWidget(
             icon: Icons.event_note,text: 'Events'),
