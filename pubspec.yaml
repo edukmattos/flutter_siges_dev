@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  cpf_cnpj_validator: ^1.0.5
   brasil_fields: ^0.4.0
   smart_select: ^3.0.3
   shared_preferences: ^0.5.4+8

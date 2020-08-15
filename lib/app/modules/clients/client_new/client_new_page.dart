@@ -122,7 +122,7 @@ class _ClientNewPageState
                               obscureText: false,
                               maxLines: 1,
                               maxLength: 20,
-                              keyboardType: TextInputType.emailAddress,
+                              keyboardType: TextInputType.number,
                               cursorColor: Colors.orange,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
@@ -153,7 +153,7 @@ class _ClientNewPageState
                               obscureText: false,
                               maxLines: 1,
                               maxLength: 30,
-                              keyboardType: TextInputType.emailAddress,
+                              keyboardType: TextInputType.name,
                               cursorColor: Colors.orange,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),

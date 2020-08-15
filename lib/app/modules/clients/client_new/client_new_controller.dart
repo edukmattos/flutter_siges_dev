@@ -1,3 +1,5 @@
+import 'package:cpf_cnpj_validator/cnpj_validator.dart';
+import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
@@ -42,6 +44,13 @@ abstract class _ClientNewControllerBase with Store {
   
   String validateEinSsa() {
     if (validatorRequired(einSsa)) return "Obrigatorio.";
+    if (einSsa.length <= 14) {
+      if (!CPFValidator.isValid(einSsa)) return "CPF Inválido.";
+      if (validateEinSsaUnique(einSsa) != null) return "CPF Indisponível.";
+    } else {
+      if (!CNPJValidator.isValid(einSsa)) return "CNPJ Inválido.";
+      if (validateEinSsaUnique(einSsa) != null) return "CNPJ Indisponível.";
+    }
     return null;
   }
 
@@ -52,12 +61,25 @@ abstract class _ClientNewControllerBase with Store {
 
   String validateEmail() {
     if (validatorRequired(email)) return "Obrigatorio.";
+    if (validatorEmail(email)) return "Inválido.";
+    if (validateEmailUnique(email) != null) return "Indisponível.";
     return null;
   }
 
   @action
-  Future<bool> save() async {
-    return await _clientNewRepository.repositorySave(einSsa, name, email);
+  Future<bool> validateEmailUnique(email) async {
+    return (await _clientNewRepository.repositoryClientEmailUnique(email));
   }
+
+  @action
+  Future<bool> validateEinSsaUnique(email) async {
+    return (await _clientNewRepository.repositoryClientEinSsaUnique(einSsa));
+  }
+
+  @action
+  Future<bool> save() async {
+    return await _clientNewRepository.repositoryClientSave(einSsa, name, email);
+  }
+
 
 }

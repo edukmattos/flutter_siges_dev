@@ -33,3 +33,41 @@ const docClientSave = '''
     }
   }
 ''';
+
+const docClientEinSsaUnique = '''
+  query getClientEinSsaUnique (\$ein_ssa:String)
+  { 
+    clients (
+      where: {
+        _or: [
+          { ein_ssa: {_eq: \$ein_ssa}},
+          { deleted_at: {_eq: null}}
+        ]
+      }
+    )
+    {
+      ein_ssa
+      email
+      deleted_at
+    }
+  }
+''';
+
+const docClientEmailUnique = '''
+  query getClientEmailUnique (\$email:String)
+  { 
+    clients (
+      where: {
+        _and: [
+          { email: {_eq: \$email}},
+          { deleted_at: {_eq: null}}
+        ]
+      }
+    )
+    {
+      ein_ssa
+      email
+      deleted_at
+    }
+  }
+''';
