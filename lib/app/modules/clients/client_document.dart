@@ -35,17 +35,16 @@ const docClientSave = '''
 ''';
 
 const docClientEinSsaUnique = '''
-  query getClientEinSsaUnique (\$ein_ssa:String)
-  { 
-    clients (
+  query qryClientEinSsaUnique (\$ein_ssa: String) { 
+    clients(
       where: {
-        _or: [
+        _and: [
           { ein_ssa: {_eq: \$ein_ssa}},
           { deleted_at: {_eq: null}}
         ]
       }
-    )
-    {
+    ) {
+      name
       ein_ssa
       email
       deleted_at
@@ -54,7 +53,7 @@ const docClientEinSsaUnique = '''
 ''';
 
 const docClientEmailUnique = '''
-  query getClientEmailUnique (\$email:String)
+  query qryClientEmailUnique (\$email:String)
   { 
     clients (
       where: {
@@ -65,6 +64,27 @@ const docClientEmailUnique = '''
       }
     )
     {
+      name
+      ein_ssa
+      email
+      deleted_at
+    }
+  }
+''';
+
+const docClientNameUnique = '''
+  query qryClientEmailUnique (\$name:String)
+  { 
+    clients (
+      where: {
+        _and: [
+          { name: {_eq: \$name}},
+          { deleted_at: {_eq: null}}
+        ]
+      }
+    )
+    {
+      name
       ein_ssa
       email
       deleted_at

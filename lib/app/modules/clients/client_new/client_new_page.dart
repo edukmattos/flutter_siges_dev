@@ -9,6 +9,7 @@ import '../../../config/app_config.dart';
 import 'client_new_controller.dart';
 
 class ClientNewPage extends StatefulWidget {
+  
   final String title;
   final String subtitle;
 
@@ -25,7 +26,7 @@ class ClientNewPage extends StatefulWidget {
 
 class _ClientNewPageState
     extends ModularState<ClientNewPage, ClientNewController> {
-  //use 'controller' variable to access controller
+    //use 'controller' variable to access controller
 
     Widget _buttonSubmit() {
     return ButtonRaisedWidget(
@@ -71,6 +72,9 @@ class _ClientNewPageState
 
   @override  
   Widget build(BuildContext context) {
+
+    final _formKey = GlobalKey<FormState>();
+    
     var appBar = AppBar(
       title: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -104,107 +108,110 @@ class _ClientNewPageState
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(8),
-                  width: constraints.maxWidth,
-                  height: constraints.maxHeight * 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Observer(
-                          name: 'observerEinSsa',
-                          builder: (_) {
-                            return TextFormField(
-                              textDirection: TextDirection.ltr,
-                              autofocus: true,
-                              onChanged: controller.changeEinSsa,
-                              obscureText: false,
-                              maxLines: 1,
-                              maxLength: 20,
-                              keyboardType: TextInputType.number,
-                              cursorColor: Colors.orange,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'CPF/CNPJ',
-                                prefixIcon: Icon(Icons.email,
-                                  color: Colors.orange, size: 20),
-                                helperText: ' ',
-                                errorText: controller.validateEinSsa(),
-                              ),
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                                CpfOuCnpjFormatter(),
-                              ],
-                              
-                            );
-                          },
-                        ),
-                        
-                        SizedBox(
-                          height: 10,
-                        ),
-                  
-                        Observer(
-                          name: 'nameObserver',
-                          builder: (_) {
-                            return TextFormField(
-                              onChanged: controller.changeName,
-                              obscureText: false,
-                              maxLines: 1,
-                              maxLength: 30,
-                              keyboardType: TextInputType.name,
-                              cursorColor: Colors.orange,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Nome',
-                                prefixIcon: Icon(Icons.lock,
-                                  color: Colors.orange, size: 20),
-                                helperText: ' ',
-                                errorText: controller.validateName(),
-                              ),
-                            );
-                          },
-                        ),
-                  
-                        SizedBox(
-                          height: 20,
-                        ),
-                  
-                        Observer(
-                          name: 'emailObserver',
-                          builder: (_) {
-                            return TextFormField(
-                              onChanged: controller.changeEmail,
-                              obscureText: false,
-                              maxLines: 1,
-                              maxLength: 30,
-                              keyboardType: TextInputType.emailAddress,
-                              cursorColor: Colors.orange,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'E-mail',
-                                prefixIcon: Icon(Icons.email,
-                                  color: Colors.orange, size: 20),
-                                helperText: ' ',
-                                errorText: controller.validateEmail(),
-                              ),
-                            );
-                          },
-                        ),
-                  
-                        SizedBox(
-                          height: 20,
-                        ),
-                  
-                        Observer(
-                          name: 'submitButtonObserver',
-                          builder: (_) {
-                            return _buttonSubmit();
-                          },
-                        ),
-                      ],
-                    ),
+                Form(
+                  key: _formKey,
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight * 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Observer(
+                            name: 'observerEinSsa',
+                            builder: (_) {
+                              return TextFormField(
+                                textDirection: TextDirection.ltr,
+                                autofocus: true,
+                                onChanged: controller.changeEinSsa,
+                                obscureText: false,
+                                maxLines: 1,
+                                maxLength: 20,
+                                keyboardType: TextInputType.number,
+                                cursorColor: Colors.orange,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'CPF/CNPJ',
+                                  prefixIcon: Icon(Icons.email,
+                                    color: Colors.orange, size: 20),
+                                  helperText: ' ',
+                                  errorText: controller.validateEinSsa(),
+                                ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  CpfOuCnpjFormatter(),
+                                ],
+                                
+                              );
+                            },
+                          ),
+                          
+                          SizedBox(
+                            height: 10,
+                          ),
+                    
+                          Observer(
+                            name: 'nameObserver',
+                            builder: (_) {
+                              return TextFormField(
+                                onChanged: controller.changeName,
+                                obscureText: false,
+                                maxLines: 1,
+                                maxLength: 30,
+                                keyboardType: TextInputType.name,
+                                cursorColor: Colors.orange,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Nome',
+                                  prefixIcon: Icon(Icons.lock,
+                                    color: Colors.orange, size: 20),
+                                  helperText: ' ',
+                                  errorText: controller.validateName(),
+                                ),
+                              );
+                            },
+                          ),
+                    
+                          SizedBox(
+                            height: 20,
+                          ),
+                    
+                          Observer(
+                            name: 'emailObserver',
+                            builder: (_) {
+                              return TextFormField(
+                                onChanged: controller.changeEmail,
+                                obscureText: false,
+                                maxLines: 1,
+                                maxLength: 30,
+                                keyboardType: TextInputType.emailAddress,
+                                cursorColor: Colors.orange,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'E-mail',
+                                  prefixIcon: Icon(Icons.email,
+                                    color: Colors.orange, size: 20),
+                                  helperText: ' ',
+                                  errorText: controller.validateEmail(),
+                                ),
+                              );
+                            },
+                          ),
+                    
+                          SizedBox(
+                            height: 20,
+                          ),
+                    
+                          Observer(
+                            name: 'submitButtonObserver',
+                            builder: (_) {
+                              return _buttonSubmit();
+                            },
+                          ),
+                        ],
+                      ),
+                  ),
                 ),
               ],
             );

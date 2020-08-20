@@ -62,22 +62,13 @@ mixin _$ClientNewController on _ClientNewControllerBase, Store {
     });
   }
 
-  final _$validateEmailUniqueAsyncAction =
-      AsyncAction('_ClientNewControllerBase.validateEmailUnique');
-
-  @override
-  Future<bool> validateEmailUnique(dynamic email) {
-    return _$validateEmailUniqueAsyncAction
-        .run(() => super.validateEmailUnique(email));
-  }
-
   final _$validateEinSsaUniqueAsyncAction =
       AsyncAction('_ClientNewControllerBase.validateEinSsaUnique');
 
   @override
-  Future<bool> validateEinSsaUnique(dynamic email) {
+  Future<bool> validateEinSsaUnique(String einSsa) {
     return _$validateEinSsaUniqueAsyncAction
-        .run(() => super.validateEinSsaUnique(email));
+        .run(() => super.validateEinSsaUnique(einSsa));
   }
 
   final _$saveAsyncAction = AsyncAction('_ClientNewControllerBase.save');

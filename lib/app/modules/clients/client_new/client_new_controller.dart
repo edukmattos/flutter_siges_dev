@@ -44,42 +44,62 @@ abstract class _ClientNewControllerBase with Store {
   
   String validateEinSsa() {
     if (validatorRequired(einSsa)) return "Obrigatorio.";
+    
     if (einSsa.length <= 14) {
       if (!CPFValidator.isValid(einSsa)) return "CPF Inválido.";
-      if (validateEinSsaUnique(einSsa) != null) return "CPF Indisponível.";
-    } else {
-      if (!CNPJValidator.isValid(einSsa)) return "CNPJ Inválido.";
-      if (validateEinSsaUnique(einSsa) != null) return "CNPJ Indisponível.";
     }
+    
+    //if (einSsa.length == 14) {
+    // // ignore: unrelated_type_equality_checks
+    // if (validateEinSsaUnique(einSsa) == false) return "CPF Indisponível.";
+    //} 
+    
+    if (einSsa.length > 14) {
+      if (!CNPJValidator.isValid(einSsa)) return "CNPJ Inválido.";
+      // ignore: unrelated_type_equality_checks
+      //if (validateEinSsaUnique(einSsa) == true) return "CNPJ Indisponível.";
+    }
+    //print("QQQQQQQ");
     return null;
   }
 
   String validateName() {
     if (validatorRequired(name)) return "Obrigatorio.";
+    //if (validateNameUnique(name) != null) return "Indisponível.";
     return null;
   }
 
   String validateEmail() {
     if (validatorRequired(email)) return "Obrigatorio.";
     if (validatorEmail(email)) return "Inválido.";
-    if (validateEmailUnique(email) != null) return "Indisponível.";
+    //if (validateEmailUnique(email) != null) return "Indisponível.";
     return null;
   }
 
-  @action
-  Future<bool> validateEmailUnique(email) async {
-    return (await _clientNewRepository.repositoryClientEmailUnique(email));
-  }
+  //@action
+  //Future<bool> validateEmailUnique(email) async {
+    //return (await _clientNewRepository.repositoryClientEmailUnique(email));
+  //}
 
   @action
-  Future<bool> validateEinSsaUnique(email) async {
-    return (await _clientNewRepository.repositoryClientEinSsaUnique(einSsa));
+  Future<bool> validateEinSsaUnique(String einSsa) async {
+    try {
+      var isUnique = await _clientNewRepository.repositoryClientEinSsaUnique(einSsa);
+      print(isUnique);
+      return isUnique;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
   }
+
+  //@action
+  //Future<bool> validateNameUnique(name) async {
+  //  return (await _clientNewRepository.repositoryClientNameUnique(name));
+  //}
 
   @action
   Future<bool> save() async {
     return await _clientNewRepository.repositoryClientSave(einSsa, name, email);
   }
-
-
 }

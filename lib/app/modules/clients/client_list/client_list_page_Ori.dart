@@ -69,82 +69,45 @@ class _ClientListPageState
           ],
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(10),
-        child: Container(
-          child: LayoutBuilder(
-            builder: (_, constraints) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  ExpansionPanelList(
-                    expansionCallback: (int index, bool isExpanded) {
-                      setState(() {
-                        isExpanded = !isExpanded;
-                      });
-                    },
-                    children: [
-                      ExpansionPanel(
-                        headerBuilder: (BuildContext context, bool isExpanded) {
-                          return ListTile(
-                            title: Text('Filtros'),
-                          );
-                        },
-                        body: ListTile(
-                          title: Text('Item 1 child'),
-                          subtitle: Text('Details goes here'),
-                        ),
-                        isExpanded: false,
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: constraints.maxWidth,
-                    height: constraints.maxHeight * 1,
-                    color: Colors.white,
-                    child: Observer(
-                      name: 'clientListObserver',
-                      builder: (BuildContext context) {
-                        if (controller.clients.hasError) {
-                          print(controller.clients.hasError);
-                          return Center(
-                            child: Text('Erro a realizar a pesquisa !'),
-                          );
-                        }
-
-                        if (controller.clients.value == null) {
-                          return Center(
-                              child: CircularProgressIndicator(
-                            backgroundColor: Colors.red,
-                          ));
-                        }
-
-                        List<ClientModel> list = controller.clients.value;
-
-                        return ListView.builder(
-                          reverse: false,
-                          itemCount: controller.clients.value.length,
-                          itemBuilder: (context, int index) {
-                            var model = list[index];
-
-                            print(model.name);
-
-                            return _getListTile(model);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
+      body: Container(
+        padding: EdgeInsets.all(5),
+        child: Observer(
+          name: 'clientListObserver',
+          builder: (BuildContext context) {
+            if (controller.clients.hasError) {
+              print(controller.clients.hasError);
+              return Center(
+                child: Text('Erro a realizar a pesquisa !'),
               );
             }
-          ),
+
+            if (controller.clients.value == null) {
+              return Center(
+                  child: CircularProgressIndicator(
+                backgroundColor: Colors.red,
+              ));
+            }
+
+            List<ClientModel> list = controller.clients.value;
+
+            return ListView.builder(
+              reverse: false,
+              itemCount: controller.clients.value.length,
+              itemBuilder: (context, int index) {
+                var model = list[index];
+
+                print(model.name);
+
+                return _getListTile(model);
+              },
+            );
+          },
         ),
       ),
       drawer: DrawerNavigationWidget(),
     );
   }
+
   ListTile _getListTile(model) {
     print(model.einSsa);
     return ListTile(
@@ -182,4 +145,3 @@ class _ClientListPageState
     );
   }
 }
-

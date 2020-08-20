@@ -45,7 +45,7 @@ class ClientModel {
     factory ClientModel.fromMap(Map<String, dynamic> json) => ClientModel(
         id: json["id"] == null ? null : json["id"],
         name: json["name"] == null ? null : json["name"],
-        einSsa: json["einSsa"] == null ? null : json["einSsa"],
+        einSsa: json["ein_ssa"] == null ? null : json["ein_ssa"],
         email: json["email"] == null ? null : json["email"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),

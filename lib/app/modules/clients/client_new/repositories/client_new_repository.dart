@@ -1,11 +1,12 @@
 import 'package:hasura_connect/hasura_connect.dart';
-import 'package:siges/app/models/client_model.dart';
 
 import '../../client_document.dart';
 import 'interfaces/client_new_repository_interface.dart';
 
 class ClientNewRepository implements IClientNewRepository {
   final HasuraConnect _hasuraConnect;
+
+  //int counter = 0;
 
   ClientNewRepository(this._hasuraConnect);
 
@@ -24,34 +25,59 @@ class ClientNewRepository implements IClientNewRepository {
   }
 
   @override
-  Future<bool> repositoryClientEmailUnique(String email) async {
+  //Future<bool> repositoryClientEmailUnique(String email) async {
     
-    var query = docClientEinSsaUnique;
+    //var query = docClientEmailUnique;
 
-    var snapshot = _hasuraConnect.subscription(query);
+    //var snapshot = _hasuraConnect.subscription(query);
 
-    var clients = snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
+    //var clients = snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
     
-    if (clients != null) {
-      return false;
-    } 
-    return true;
-  }
+    //if (clients != null) {
+    //  return false;
+    //} 
+    //return true;
+  //}
 
   @override
   Future<bool> repositoryClientEinSsaUnique(String einSsa) async {
-    
+
+    //await Future.delayed(Duration(seconds: 3));
+
+    bool result;
+
     var query = docClientEinSsaUnique;
 
-    var snapshot = _hasuraConnect.subscription(query);
+    var data = await _hasuraConnect.query(query, variables: {"ein_ssa": einSsa});
 
-    var clients = snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
+    var clients = data['data']['clients'];
+
+    print(clients);
     
-    if (clients != null) {
-      return false;
-    } 
-    return true;
+    if (clients.isEmpty) {
+    //  print("CPF/CNPJ INEXISTENTE. OK");
+      result = true;
+    } else {
+    //  print("<<<CPF/CNPJ EXISTENTE. ERROR>>>");
+      result = false;
+    }
+    return Future<bool>.value(result);   
   }
+
+  @override
+  //Future<bool> repositoryClientNameUnique(String name) async {
+    
+    //var query = docClientNameUnique;
+
+    //var snapshot = _hasuraConnect.subscription(query);
+
+    //var clients = snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
+    
+    //if (clients != null) {
+    //  return false;
+    //} 
+    //return true;
+  //}
 
   //dispose will be called automatically
   @override
