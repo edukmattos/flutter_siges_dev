@@ -1,20 +1,20 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:siges/app/config/app_config.dart';
 import 'package:siges/app/models/product_model.dart';
-import 'material_show_controller.dart';
+import 'product_search_controller.dart';
 
-class MaterialShowPage extends StatefulWidget {
+class ProductSearchPage extends StatefulWidget {
   final String title;
-  const MaterialShowPage({Key key, this.title = "MaterialShow"})
+  const ProductSearchPage({Key key, this.title = "ProductSearch"})
       : super(key: key);
 
   @override
-  _MaterialShowPageState createState() => _MaterialShowPageState();
+  _ProductSearchPageState createState() => _ProductSearchPageState();
 }
 
-class _MaterialShowPageState
-    extends ModularState<MaterialShowPage, MaterialShowController> {
+class _ProductSearchPageState
+    extends ModularState<ProductSearchPage, ProductSearchController> {
   //use 'controller' variable to access controller
 
   @override
@@ -25,7 +25,7 @@ class _MaterialShowPageState
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
             child: Text(
               "Women",
               style: Theme.of(context)
@@ -47,7 +47,7 @@ class _MaterialShowPageState
                   crossAxisSpacing: 5,
                 ),
                 itemBuilder: (context, index) =>
-                    ItemCard(product: products[index]),
+                    ItemCard(product: products[index], press: () {}),
               ),
             ),
           )
@@ -63,34 +63,37 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(5),
-            height: 180,
-            width: 160,
-            decoration: BoxDecoration(
-              color: product.color,
-              borderRadius: BorderRadius.circular(16),
+    return GestureDetector(
+      onTap: press,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(5),
+              height: 180,
+              width: 160,
+              decoration: BoxDecoration(
+                color: product.color,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Image.asset(product.image),
             ),
-            child: Image.asset(product.image),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Text(
-            // products is out demo list
-            product.title,
-            style: TextStyle(color: Colors.red),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3),
+            child: Text(
+              // products is out demo list
+              product.title,
+              style: TextStyle(color: Colors.red),
+            ),
           ),
-        ),
-        Text(
-          "\$${product.price}",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        )
-      ],
+          Text(
+            "\$${product.price}",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 }
