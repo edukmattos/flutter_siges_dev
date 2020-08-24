@@ -22,44 +22,6 @@ const String docProductAll = '''
   }
 ''';
 
-const docClientEinSsaUnique = '''
-  query qryClientEinSsaUnique (\$ein_ssa: String) { 
-    clients(
-      where: {
-        _and: [
-          { ein_ssa: {_eq: \$ein_ssa}},
-          { deleted_at: {_eq: null}}
-        ]
-      }
-    ) {
-      name
-      ein_ssa
-      email
-      deleted_at
-    }
-  }
-''';
-
-const docClientEmailUnique = '''
-  query qryClientEmailUnique (\$email:String)
-  { 
-    clients (
-      where: {
-        _and: [
-          { email: {_eq: \$email}},
-          { deleted_at: {_eq: null}}
-        ]
-      }
-    )
-    {
-      name
-      ein_ssa
-      email
-      deleted_at
-    }
-  }
-''';
-
 const docProductById = '''
   query qryProductById (\$id:String)
   { 
