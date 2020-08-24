@@ -6,8 +6,13 @@ import 'product_show_controller.dart';
 
 class ProductShowPage extends StatefulWidget {
   final String title;
-  const ProductShowPage({Key key, this.title = "ProductShow"})
-      : super(key: key);
+  final String id;
+  const ProductShowPage({
+    Key key, 
+    this.title = "ProductShow",
+    @required this.id,
+  })
+  : super(key: key);
 
   @override
   _ProductShowPageState createState() => _ProductShowPageState();
@@ -17,6 +22,8 @@ class _ProductShowPageState
     extends ModularState<ProductShowPage, ProductShowController> {
   //use 'controller' variable to access controller
   final ProductModel product;
+
+  _ProductShowPageState(this.product);
 
   @override
   Widget build(BuildContext context) {

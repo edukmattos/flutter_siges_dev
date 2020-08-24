@@ -1,18 +1,27 @@
-import 'package:dio/native_imp.dart';
+import 'package:hasura_connect/hasura_connect.dart';
+import '../../../../models/product_model.dart';
+import '../../product_document.dart';
 import 'interfaces/product_show_repository_interface.dart';
 
 class ProductShowRepository implements IProductShowRepository {
-  final DioForNative client;
+  
+  final HasuraConnect _hasuraConnect;
 
-  ProductShowRepository(this.client);
+  ProductShowRepository(this._hasuraConnect);
 
-  Future fetchPost() async {
-    final response =
-        await client.get('https://jsonplaceholder.typicode.com/posts/1');
-    return response.data;
+  @override
+  Stream<List<ProductModel>> getProductById() {
+    
+    var query = docProductById;
+
+    var snapshot = _hasuraConnect.subscription(query);
+    
+    return snapshot.map((data) => ProductModel.fromJsonList(data['data']['clients']));
+
   }
 
-  //dispose will be called automatically
   @override
-  void dispose() {}
+  void dispose() {
+    // TODO: implement dispose
+  }
 }

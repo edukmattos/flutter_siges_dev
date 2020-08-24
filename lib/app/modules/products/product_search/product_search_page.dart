@@ -72,7 +72,9 @@ class _ProductSearchPageState
                         var model = list[index];
                         return ItemCard(
                           product: model, 
-                          press: () {}
+                          press: () {
+                            Modular.to.pushNamed("/show/:id", arguments: model.id);
+                          }
                         );
                       }
                     );
