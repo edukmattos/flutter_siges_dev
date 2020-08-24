@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siges/app/config/app_config.dart';
 import 'package:siges/app/models/product_model.dart';
@@ -23,35 +24,65 @@ class _ProductSearchPageState
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-            child: Text(
-              "Women",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Categories(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: GridView.builder(
-                itemCount: products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.75,
-                  mainAxisSpacing: 2,
-                  crossAxisSpacing: 5,
-                ),
-                itemBuilder: (context, index) =>
-                    ItemCard(product: products[index], press: () {}),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start, 
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+              child: Text(
+                "Women",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
             ),
-          )
-        ]));
+            Categories(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+                child: Observer(
+                  name: 'productListObserver',
+                  builder: (BuildContext context) {
+                    if (controller.products.hasError) {
+                          print(controller.products.hasError);
+                          return Center(
+                            child: Text('Erro a realizar a pesquisa !'),
+                          );
+                        }
+                    if (controller.products.value == null) {
+                          return Center(
+                              child: CircularProgressIndicator(
+                            backgroundColor: Colors.red,
+                          ));
+                        }
+
+                    List<ProductModel> list = controller.products.value;
+                  
+                    return GridView.builder(
+                      itemCount: controller.products.value.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.75,
+                        mainAxisSpacing: 2,
+                        crossAxisSpacing: 5,
+                      ),
+                      
+                      itemBuilder: (context, int index) {
+                        var model = list[index];
+                        return ItemCard(
+                          product: model, 
+                          press: () {}
+                        );
+                      }
+                    );
+                  }
+                ),
+              ),
+            ),
+          ]
+        )
+    );
   }
 }
 
@@ -132,7 +163,7 @@ class _CategoriesState extends State<Categories> {
         });
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -144,7 +175,7 @@ class _CategoriesState extends State<Categories> {
               ),
             ),
             Container(
-                margin: EdgeInsets.only(top: 5),
+                margin: EdgeInsets.only(top: kDefaultPaddin / 4),
                 height: 2,
                 width: 30,
                 color:
