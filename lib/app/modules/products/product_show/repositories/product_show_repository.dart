@@ -10,7 +10,7 @@ class ProductShowRepository implements IProductShowRepository {
   ProductShowRepository(this._hasuraConnect, this.id);
 
   @override
-  Stream<List<ProductModel>> getProductById() {
+  Stream<List<ProductModel>> getProductById(String id) {
     var query = docProductById;
 
     var snapshot = _hasuraConnect.subscription(query);
@@ -21,6 +21,6 @@ class ProductShowRepository implements IProductShowRepository {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+   
   }
 }

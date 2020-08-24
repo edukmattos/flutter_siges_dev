@@ -73,7 +73,7 @@ class _ProductSearchPageState
                         return ItemCard(
                           product: model, 
                           press: () {
-                            Modular.to.pushNamed("/show/:id", arguments: model.id);
+                            Modular.to.pushNamed("/show/:id", arguments: ProductModel(id: model.id));
                           }
                         );
                       }

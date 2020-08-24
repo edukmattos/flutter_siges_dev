@@ -9,7 +9,6 @@ import 'modules/materials/material_dashboard/material_dashboard_module.dart';
 import 'modules/materials/material_list/material_list_module.dart';
 import 'modules/materials/material_new/material_new_module.dart';
 import 'modules/products/product_search/product_search_module.dart';
-import 'modules/products/product_show/product_show_module.dart';
 import 'modules/units_measure/units_measure_list/units_measure_list_module.dart';
 import 'modules/units_measure/units_measure_new/units_measure_new_module.dart';
 

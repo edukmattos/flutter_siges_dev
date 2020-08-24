@@ -15,7 +15,7 @@ class ProductShowPage extends StatefulWidget {
   : super(key: key);
 
   @override
-  _ProductShowPageState createState() => _ProductShowPageState();
+  _ProductShowPageState createState() => _ProductShowPageState(id);
 }
 
 class _ProductShowPageState
