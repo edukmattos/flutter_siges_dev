@@ -16,11 +16,9 @@ class ProductShowRepository implements IProductShowRepository {
     var snapshot = _hasuraConnect.subscription(query);
 
     return snapshot
-        .map((data) => ProductModel.fromJsonList(data['data']['products']));
+        .map((data) => ProductModel.fromJsonList(data['data']['product']));
   }
 
   @override
-  void dispose() {
-   
-  }
+  void dispose() {}
 }

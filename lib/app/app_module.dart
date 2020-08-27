@@ -9,6 +9,7 @@ import 'modules/materials/material_dashboard/material_dashboard_module.dart';
 import 'modules/materials/material_list/material_list_module.dart';
 import 'modules/materials/material_new/material_new_module.dart';
 import 'modules/products/product_search/product_search_module.dart';
+import 'modules/products/product_show/product_show_page.dart';
 import 'modules/units_measure/units_measure_list/units_measure_list_module.dart';
 import 'modules/units_measure/units_measure_new/units_measure_new_module.dart';
 
@@ -26,6 +27,9 @@ class AppModule extends MainModule {
             transition: TransitionType.rightToLeft),
         Router('/material/list',
             module: MaterialListModule(),
+            transition: TransitionType.rightToLeft),
+        Router("/product/show/:id",
+            child: (_, args) => ProductShowPage(id: args.params['id']),
             transition: TransitionType.rightToLeft),
         Router('/client/new',
             module: ClientNewModule(), transition: TransitionType.rightToLeft),

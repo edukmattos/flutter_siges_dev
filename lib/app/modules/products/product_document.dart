@@ -8,7 +8,10 @@ const String docProductAll = '''
     {
       id
       code
+      title
       description
+      
+      image
       product_type_id
       product_type {
         id
@@ -39,7 +42,7 @@ const docProductById = '''
       description
       title
       image
-      color
+      
       price
       size
       product_type_id

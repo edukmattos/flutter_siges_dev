@@ -8,30 +8,28 @@ class ProductShowPage extends StatefulWidget {
   final String title;
   final String id;
   const ProductShowPage({
-    Key key, 
+    Key key,
     this.title = "ProductShow",
-    @required this.id,
-  })
-  : super(key: key);
+    this.id,
+  }) : super(key: key);
+
+  ProductModel get product => null;
 
   @override
-  _ProductShowPageState createState() => _ProductShowPageState(id);
+  _ProductShowPageState createState() => _ProductShowPageState();
 }
 
 class _ProductShowPageState
     extends ModularState<ProductShowPage, ProductShowController> {
   //use 'controller' variable to access controller
-  final ProductModel product;
-
-  _ProductShowPageState(this.product);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: product.color,
+      backgroundColor: Colors.blue,
       appBar: AppBar(
-        backgroundColor: product.color,
+        backgroundColor: Colors.blueAccent,
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

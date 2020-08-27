@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'dart:ui';
 
-import 'product_type_model.dart';
-
 class ProductModel {
   ProductModel({
     this.id,
