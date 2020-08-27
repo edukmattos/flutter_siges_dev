@@ -13,7 +13,9 @@ const appPageTagFunctionSearch = 'Pesquisa';
 const appPageTagFunctionDashboard = 'Painel Controle';
 
 const appPageTagMaterial = 'Materiais';
-const appPageTagClient = 'Clientes';
+const appPageTagClients = 'Clientes';
+const appPageTagClient = 'Cliente';
+const appPageTagClientLocations = 'Endereços';
 
 const appClientDashboardPageTag = 'Clientes';
 const appClientListPageTag = 'Clientes';
