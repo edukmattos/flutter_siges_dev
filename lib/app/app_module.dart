@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app_controller.dart';
 import 'app_widget.dart';
+import 'modules/auth/login/login_module.dart';
 import 'modules/clients/client_list/client_list_module.dart';
 import 'modules/clients/client_locations_list/client_locations_list_module.dart';
 import 'modules/clients/client_locations_new/client_locations_new_module.dart';
@@ -23,7 +24,7 @@ class AppModule extends MainModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, module: ClientShowModule()),
+        Router(Modular.initialRoute, module: LoginModule()),
         //MATERIALS
         Router('/material/dashboard',
             module: MaterialDashboardModule(),

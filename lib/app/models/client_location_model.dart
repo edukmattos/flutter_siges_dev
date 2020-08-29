@@ -25,11 +25,10 @@ class ClientLocation {
   final ClientLocationPosition position;
   final File imagePath;
 
-  ClientLocation({
-    @required this.id,
-    @required this.clientId,
-    @required this.description,
-    @required this.position,
-    this.imagePath
-  })
+  ClientLocation(
+      {@required this.id,
+      @required this.clientId,
+      @required this.description,
+      @required this.position,
+      this.imagePath});
 }
